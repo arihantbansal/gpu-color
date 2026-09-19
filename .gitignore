@@ -1,0 +1,11 @@
+# data: downloaded by training/scripts/fetch_data.sh, never committed
+training/data/*
+!training/data/.gitkeep
+training/runs/
+.venv/
+__pycache__/
+node_modules/
+web/dist/
+.DS_Store
+.vercel/
+.vercel

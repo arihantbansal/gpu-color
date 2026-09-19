@@ -1,0 +1,17 @@
+[project]
+name = "gpu-color-training"
+version = "0.1.0"
+authors = [{ name = "arihantbansal" }]
+license = "MIT"
+description = "Training pipeline for the gpu-color browser model."
+requires-python = ">=3.12"
+dependencies = [
+    "torch>=2.5",
+    "numpy>=2.0",
+]
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[tool.uv]
+package = false

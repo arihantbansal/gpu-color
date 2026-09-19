@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>gpu-color — arihantbansal</title>
+    <meta name="author" content="arihantbansal" />
+    <meta name="description" content="Turn color descriptions into editable swatches with a tiny model that runs locally in your browser." />
+  </head>
+  <body>
+    <main id="app">
+      <header>
+        <div>
+          <h1>gpu-color</h1>
+          <p>Describe a color. Adjust it. Copy it.</p>
+        </div>
+        <a href="https://github.com/arihantbansal/gpu-color" target="_blank" rel="noopener noreferrer" aria-label="View source on GitHub" title="View source on GitHub">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
+            <path d="M12 .75a11.25 11.25 0 0 0-3.558 21.922c.563.104.768-.244.768-.542 0-.267-.01-.974-.015-1.912-3.13.68-3.79-1.508-3.79-1.508-.512-1.3-1.25-1.646-1.25-1.646-1.022-.699.078-.685.078-.685 1.13.08 1.725 1.16 1.725 1.16 1.005 1.722 2.637 1.225 3.28.937.102-.728.393-1.225.715-1.507-2.498-.284-5.124-1.25-5.124-5.56 0-1.228.439-2.233 1.16-3.02-.117-.285-.503-1.429.11-2.978 0 0 .945-.303 3.094 1.153A10.79 10.79 0 0 1 12 6.186c.956.005 1.918.13 2.816.378 2.148-1.456 3.092-1.153 3.092-1.153.615 1.549.229 2.693.112 2.977.722.788 1.158 1.793 1.158 3.021 0 4.32-2.63 5.273-5.136 5.552.404.35.765 1.041.765 2.099 0 1.516-.014 2.74-.014 3.112 0 .3.203.65.774.54A11.25 11.25 0 0 0 12 .75Z" />
+          </svg>
+        </a>
+      </header>
+      <section class="stage" aria-label="Color picker">
+        <div class="picker">
+          <div class="field" tabindex="0" role="group" aria-label="Saturation and brightness. Use left and right arrows for saturation, up and down for brightness." aria-describedby="field-value">
+            <span class="cursor"></span>
+          </div>
+          <span id="field-value" class="sr-only"></span>
+          <label class="track hue">
+            <span class="sr-only">Hue</span>
+            <input id="hue" type="range" min="0" max="360" value="240">
+          </label>
+          <label class="track alpha">
+            <span class="sr-only">Opacity</span>
+            <input id="alpha" type="range" min="0" max="100" value="100">
+          </label>
+          <div class="entry">
+            <label class="sr-only" for="phrase">CSS color or description</label>
+            <input id="phrase" maxlength="120" placeholder="CSS color or description" aria-describedby="status" autocomplete="off" spellcheck="false">
+            <span class="loading" aria-label="Loading model"></span>
+          </div>
+          <div class="examples" role="group" aria-label="Example descriptions">
+            <button type="button">dusty rose</button>
+            <button type="button">light blue</button>
+            <button type="button">dark blue</button>
+          </div>
+          <div class="result">
+            <span class="swatch" aria-hidden="true"></span>
+            <label class="sr-only" for="hex">Hex color</label>
+            <input id="hex" readonly spellcheck="false">
+            <button id="copy" type="button">
+              <span class="copy-icons" aria-hidden="true">
+                <svg class="copy-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="7" y="7" width="9" height="10" rx="2" />
+                  <path d="M12 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2" />
+                </svg>
+                <svg class="check-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="m4 10 4 4 8-8" />
+                </svg>
+              </span>
+              <span class="copy-label">Copy</span>
+            </button>
+          </div>
+          <p id="status" role="status"></p>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="/src/main.ts">
+    </script>
+  </body>
+</html>

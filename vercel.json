@@ -1,0 +1,21 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "installCommand": "cd web && bunx bun@1.4.2 install --frozen-lockfile",
+  "buildCommand": "cd web && bunx bun@1.4.2 run build --base=/gpu-color/",
+  "outputDirectory": "web/dist",
+  "rewrites": [
+    {
+      "source": "/gpu-color",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/gpu-color/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/gpu-color/:path*",
+      "destination": "/:path*"
+    }
+  ]
+}
