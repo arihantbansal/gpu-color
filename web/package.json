@@ -1,6 +1,6 @@
 {
   "name": "gpu-color-demo",
-  "description": "A tiny local neural model and interactive color picker.",
+  "description": "A tiny model that turns color descriptions into colors, locally in your browser.",
   "author": "arihantbansal",
   "license": "MIT",
   "private": true,

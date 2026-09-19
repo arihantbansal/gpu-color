@@ -1,34 +1,38 @@
 # gpu-color
 
-A small local model that turns color descriptions into editable color swatches.
+A tiny model that turns color descriptions into colors, locally in your browser.
 
-CSS colours use the browser's parser. Other descriptions use a local neural
-model and can be adjusted with the picker controls. The demo uses CPU
-inference; a WebGPU runtime is included.
+[Try the demo](https://arihantbansal.com/gpu-color/)
 
-## Run the picker
+Type a description such as `dusty rose`, adjust the color, and copy its hex value.
+CSS colors use the browser's parser. Other descriptions use a 43.4 KB neural
+model. Predictions are approximate, especially for unfamiliar names.
 
-```bash
+The demo uses CPU inference. A WebGPU runtime is also included.
+
+## Run locally
+
+```sh
 cd web
 bun install --frozen-lockfile
 bun run dev
 ```
 
-Type a description such as `dusty rose`, paste a CSS colour, or adjust the
-swatch. The exported model is already included, so training is not required.
+The trained model is included.
 
-The model is 43.4 KB. Predictions are approximate, especially for unfamiliar
-names. [Training details](training/README.md) include evaluation results and
-known errors.
+## Test and build
 
-## Check the project
+From `web/`:
 
-```bash
-cd web
+```sh
 bun run test
 bun run build
 ```
 
-Inspired by [gpu-lexer](https://github.com/vercel-labs/gpu-lexer).
+See [training details](training/README.md) for evaluation results and known errors.
 
-MIT. Training data comes from the [xkcd color survey](https://blog.xkcd.com/2010/05/03/color-survey-results/).
+Inspired by [gpu-lexer](https://github.com/vercel-labs/gpu-lexer).
+Training data comes from the [xkcd color survey](https://blog.xkcd.com/2010/05/03/color-survey-results/).
+See [third-party notices](THIRD_PARTY_NOTICES.md) for attribution.
+
+[MIT](LICENSE) © arihantbansal.
