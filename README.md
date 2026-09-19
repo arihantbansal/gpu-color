@@ -1,6 +1,6 @@
 # gpu-color
 
-A tiny model that turns color descriptions into colors, locally in your browser.
+A tiny model that turns color descriptions into hex codes, locally in your browser.
 
 [Try the demo](https://arihantbansal.com/gpu-color/)
 
