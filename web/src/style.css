@@ -72,7 +72,7 @@ header a:hover {
 }
 
 .field {
-  height: clamp(160px, calc(100svh - 400px), 340px);
+  height: clamp(160px, calc(100svh - 460px), 340px);
   position: relative;
   border-radius: 12px;
   background-image: linear-gradient(to top, #000, transparent), linear-gradient(to right, #fff, transparent);
@@ -151,6 +151,7 @@ header a:hover {
 }
 
 .entry {
+  position: relative;
   display: flex;
   align-items: center;
   min-height: 46px;
@@ -185,22 +186,68 @@ header a:hover {
   font-size: 14px;
 }
 
+.phrase-help {
+  flex-shrink: 0;
+  margin-inline-end: -13px;
+}
+
+#help-button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: #60606a;
+  cursor: pointer;
+}
+
+#help-button:focus-visible {
+  outline: 2px solid #29292e;
+  outline-offset: -4px;
+}
+
+@media (hover: hover) {
+  #help-button:hover {
+    background: #f0f0f4;
+  }
+}
+
+#phrase-help {
+  position: absolute;
+  z-index: 1;
+  inset-inline: 0;
+  bottom: 100%;
+  padding: 12px 14px;
+  border: 1px solid #dedee4;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 4px 16px #00000012;
+  color: #55555f;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 .examples {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 0;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px 0 16px;
 }
 
 .examples button {
-  min-height: 30px;
+  min-height: 32px;
   padding: 5px 10px;
   border: 1px solid #e7e7ec;
   border-radius: 7px;
   background: transparent;
   color: #60606a;
   font: inherit;
-  font-size: 11px;
+  font-size: 12px;
+  line-height: 20px;
   white-space: nowrap;
   cursor: pointer;
   transition: background-color 150ms, scale 150ms;
@@ -213,6 +260,13 @@ header a:hover {
 
 .examples button:active {
   scale: .96;
+}
+
+#result-label {
+  margin: 0 0 4px;
+  color: #72727a;
+  font-size: 12px;
+  line-height: 18px;
 }
 
 .result {
@@ -360,7 +414,7 @@ header a:hover {
     padding-top: 20px;
   }
   .field {
-    height: clamp(140px, calc(100svh - 400px), 320px);
+    height: clamp(140px, calc(100svh - 460px), 320px);
   }
   .entry input {
     font-size: 16px;

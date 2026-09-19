@@ -19,6 +19,40 @@ try {
   await page.goto(url);
   await waitForReady(page);
 
+  const help = page.locator("#phrase-help");
+  const helpButton = page.getByRole("button", { name: "Color description tips" });
+  assert.equal(await help.isVisible(), false);
+  await helpButton.hover();
+  assert.equal(await help.isVisible(), true);
+  await help.hover();
+  assert.equal(await help.isVisible(), true);
+  await page.keyboard.press("Escape");
+  assert.equal(await help.isVisible(), false);
+  await page.locator("#phrase").focus();
+  await page.keyboard.press("Tab");
+  assert.equal(await help.isVisible(), true);
+  await page.keyboard.press("Escape");
+  assert.equal(await help.isVisible(), false);
+  await page.keyboard.press("Space");
+  assert.equal(await help.isVisible(), true);
+  await page.keyboard.press("Tab");
+  assert.equal(await help.isVisible(), false);
+
+  const touchContext = await browser.newContext({ hasTouch: true, isMobile: true, viewport: { width: 320, height: 667 } });
+  const touchPage = await touchContext.newPage();
+  await touchPage.goto(url);
+  await waitForReady(touchPage);
+  await touchPage.locator("#help-button").tap();
+  assert.equal(await touchPage.locator("#phrase-help").isVisible(), true);
+  const helpBounds = await touchPage.locator("#phrase-help").boundingBox();
+  assert.ok(helpBounds.x >= 0 && helpBounds.x + helpBounds.width <= 320 && helpBounds.y >= 0);
+  await touchPage.locator("#help-button").tap();
+  assert.equal(await touchPage.locator("#phrase-help").isVisible(), false);
+  await touchPage.locator("#help-button").tap();
+  await touchPage.locator("#phrase").tap();
+  assert.equal(await touchPage.locator("#phrase-help").isVisible(), false);
+  await touchContext.close();
+
   await page.locator("#phrase").fill("honeydew");
   await page.waitForFunction(() => document.querySelector("#hex").value === "#f0fff0");
   assert.equal(await page.locator("#copy").getAttribute("title"), "Copy #f0fff0");
@@ -57,9 +91,10 @@ try {
 
   const examples = page.locator(".examples button");
   assert.ok(await examples.count() >= 3);
-  for (const label of ["dusty rose", "light blue", "dark blue"]) assert.ok(await examples.filter({ hasText: label }).count(), `missing example: ${label}`);
-  await examples.filter({ hasText: "light blue" }).click();
-  assert.equal(await page.locator("#phrase").inputValue(), "light blue");
+  for (const label of ["bubblegum pink", "radioactive lime", "electric violet"]) assert.ok(await examples.filter({ hasText: label }).count(), `missing example: ${label}`);
+  await examples.filter({ hasText: "radioactive lime" }).click();
+  assert.equal(await page.locator("#phrase").inputValue(), "radioactive lime");
+  assert.equal(await page.locator("#result-label").textContent(), "Suggested color");
 
   for (const viewport of viewports) {
     await page.setViewportSize(viewport);

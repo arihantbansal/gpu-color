@@ -13,6 +13,38 @@ const statusMessage = document.querySelector<HTMLElement>("#status")!;
 const copyButton = document.querySelector<HTMLButtonElement>("#copy")!;
 const copyLabel = document.querySelector<HTMLElement>(".copy-label")!;
 const fieldValue = document.querySelector<HTMLElement>("#field-value")!;
+const resultLabel = document.querySelector<HTMLElement>("#result-label")!;
+const helpButton = document.querySelector<HTMLButtonElement>("#help-button")!;
+const phraseHelp = document.querySelector<HTMLElement>("#phrase-help")!;
+const helpContainer = document.querySelector<HTMLElement>(".phrase-help")!;
+let helpPinned = false;
+
+function setHelpOpen(open: boolean) {
+  phraseHelp.hidden = !open;
+  helpButton.setAttribute("aria-expanded", String(open));
+  if (!open) helpPinned = false;
+}
+
+helpContainer.onpointerenter = event => {
+  if (event.pointerType === "mouse") setHelpOpen(true);
+};
+helpContainer.onpointerleave = () => {
+  if (!helpPinned && !helpButton.matches(":focus-visible")) setHelpOpen(false);
+};
+helpButton.onfocus = () => {
+  if (helpButton.matches(":focus-visible")) setHelpOpen(true);
+};
+helpButton.onblur = () => setHelpOpen(false);
+helpButton.onclick = () => {
+  helpPinned = !helpPinned;
+  setHelpOpen(helpPinned);
+};
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") setHelpOpen(false);
+});
+document.addEventListener("pointerdown", event => {
+  if (event.target instanceof Node && !helpContainer.contains(event.target)) setHelpOpen(false);
+});
 
 let model: ColorModel | null = null;
 let hueDegrees = 240;
@@ -49,6 +81,7 @@ function renderColor() {
 
 function applyManualChange() {
   clearTimeout(inputTimer);
+  resultLabel.textContent = "Selected color";
   renderColor();
   statusMessage.textContent = "";
 }
@@ -80,6 +113,7 @@ function applyTextInput() {
     rgb = labToRgb(model.predict(text));
   }
   statusMessage.textContent = "";
+  resultLabel.textContent = parsed ? "Selected color" : "Suggested color";
   const hsv = rgbToHsv(rgb);
   if (hsv[1]! > 0) {
     hueDegrees = hsv[0]!;

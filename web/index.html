@@ -36,14 +36,25 @@
           </label>
           <div class="entry">
             <label class="sr-only" for="phrase">CSS color or description</label>
-            <input id="phrase" maxlength="120" placeholder="CSS color or description" aria-describedby="status" autocomplete="off" spellcheck="false">
+            <input id="phrase" maxlength="120" placeholder="Describe a color…" aria-describedby="status" autocomplete="off" spellcheck="false">
             <span class="loading" aria-label="Loading model"></span>
+            <span class="phrase-help">
+              <button id="help-button" type="button" aria-label="Color description tips" aria-describedby="phrase-help" aria-controls="phrase-help" aria-expanded="false">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <circle cx="10" cy="10" r="7.5" />
+                  <path d="M10 9v5" />
+                  <circle cx="10" cy="6" r=".75" fill="currentColor" stroke="none" />
+                </svg>
+              </button>
+              <span id="phrase-help" role="tooltip" hidden>Try short descriptions like “bubblegum pink”, or paste a CSS color such as #ff8800. References to people, places, or scenes may give unexpected results.</span>
+            </span>
           </div>
           <div class="examples" role="group" aria-label="Example descriptions">
-            <button type="button">dusty rose</button>
-            <button type="button">light blue</button>
-            <button type="button">dark blue</button>
+            <button type="button">bubblegum pink</button>
+            <button type="button">radioactive lime</button>
+            <button type="button">electric violet</button>
           </div>
+          <p id="result-label">Selected color</p>
           <div class="result">
             <span class="swatch" aria-hidden="true"></span>
             <label class="sr-only" for="hex">Hex color</label>
